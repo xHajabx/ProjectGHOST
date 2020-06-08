@@ -1,7 +1,7 @@
 var express = require("express");
 var app = express();
-var Three = require("three");
-var scene = new Three.Scene();
+var THREE = require("three");
+var scene = new THREE.Scene();
 
 // // Convert gITF to Draco gITF
 // const gltfPipeline = require('gltf-pipeline');
