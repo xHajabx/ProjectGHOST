@@ -1,0 +1,16 @@
+{
+  "name": "firstscene",
+  "version": "1.0.0",
+  "description": "First Scene using Three.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hijab Syeda",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "three": "^0.117.1"
+  }
+}

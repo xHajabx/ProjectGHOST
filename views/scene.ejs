@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { display: block; }
+		</style>
+		
+	</head>
+	<body>
+		<h1>
+			Three JS Rocks
+		</h1>
+		   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.js"></script>
+    	   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+		   <script>
+			
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setClearColor("#e5e5e5");
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			document.body.appendChild(renderer.domElement);
+			   
+			window.addEventListener('resize', () => {
+				renderer.setSize(window.innerWidth, window.innerHeight);
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix(); // updates on changes made
+			});
+		
+			// add eventlisteners to three.js -> DOM elements
+			// Raycaster returns an array of objects that it sees
+			var raycaster = new THREE.Raycaster();
+			var mouse = new THREE.Vector2();
+			   
+			var geometry = new THREE.BoxGeometry(1,1,1);
+			var material = new THREE.MeshLambertMaterial({color: 0xF7F7F7});
+			var cube = new THREE.Mesh(geometry, material);
+			// cube.position.set(2, 2, -2);
+			// cube.rotation.set(45, 0, 0);
+			// mesh.scale.set(1, 2, 1);
+			camera.position.z = 5;
+			scene.add(cube);
+			   
+			meshX = -10;
+			// create a for loop with 10 diffrent cubes in random places
+			for(var i = 0; i < 15; i++) {
+				var cube = new THREE.Mesh(geometry, material);
+				cube.position.x = (Math.random() - 0.5) * 10;
+				cube.position.y = (Math.random() - 0.5) * 10;
+				cube.position.z = (Math.random() - 0.5) * 10;
+				
+				scene.add(cube);
+				meshX += 1;
+			}
+			 
+			// cube.position.x = -2;
+			// cube.position.y = 2;
+			// cube.position.z = 2;
+			// cube.position.set(2,2,-2);
+			// cube.rotation.set(45, 0, 0);
+			// cube.scale.set(1, 2, 1);
+			   
+			
+			var geometry = new THREE.BoxGeometry(1,1,1);
+			var material = new THREE.MeshLambertMaterial({color: 0xFFCC00});
+			var cube = new THREE.Mesh(geometry, material);
+			cube.position.y = 2;
+			scene.add(cube);
+			   
+			// var geometry = new THREE.SphereGeometry(1, 100, 50);
+			// var material = new THREE.MeshLambertMaterial({color: 0xFFCC00});
+			// var mesh = new THREE.Mesh(geometry, material);
+			// scene.add(mesh);
+			// camera.position.z = 5;
+			
+			   
+			var light = new THREE.PointLight(0xFFFFFF, 1, 500);
+			light.position.set(0, 0 , 0);
+			scene.add(light);
+			   
+			var light = new THREE.PointLight(0xFFFFFF, 2, 1000);
+			light.position.set(0, 0 , 25);
+			scene.add(light);
+			
+			
+
+			var render = function() {
+				requestAnimationFrame(render);
+				renderer.render(scene, camera);
+			}
+			
+			render();
+			   
+// 			function animate() {
+// 				requestAnimationFrame(animate);
+// 				// cube.rotation.x += 0.01; // 60 fps 
+// 				// cube.rotation.y += 0.01;
+// 				// cube.scale.x -= 0.01
+				
+// 				renderer.render(scene, camera);
+// 			}
+			   
+			   
+// 			animate();
+			   
+			function onMouseMove( event ) {
+
+			// calculate mouse position in normalized device coordinates
+			// (-1 to +1) for both components
+
+				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+				
+				raycaster.setFromCamera( mouse, camera );
+				// calculate objects intersecting the picking ray
+				var intersects = raycaster.intersectObjects( scene.children, true );
+
+				for (var i = 0; i < intersects.length; i++ ) {
+					
+					this.tl = new TimelineMax(); 
+					this.tl.to(intersects[i].object.scale, 1, {x: 2, ease: Expo.easeOut}) 
+					this.tl.to(intersects[i].object.scale, .5, {x: .5, ease: Expo.easeOut})
+					this.tl.to(intersects[i].object.position, .5, {x: 2, ease: Expo.easeOut})				
+					this.tl.to(intersects[i].object.rotation, .5, {y: Math.PI*.5, ease: Expo.easeOut}, "-=1.5")
+
+				}
+				
+			}
+
+			   
+			window.addEventListener( 'mousemove', onMouseMove, false );
+
+		
+	   
+			   
+		</script>
+	</body>
+</html>
+			
+			
