@@ -1,30 +1,8 @@
 var express = require("express");
 var app = express();
-var THREE = require("three");
-var scene = new THREE.Scene();
 
-// // Convert gITF to Draco gITF
-// const gltfPipeline = require('gltf-pipeline');
-// const fsExtra = require('fs-extra');
-// const processGltf = gltfPipeline.processGltf;
-// const gltf = fsExtra.readJsonSync('model.gltf');
-// const options = {
-//     dracoOptions: {
-//         compressionLevel: 10
-//     }
-// };
-// processGltf(gltf, options)
-//     .then(function(results) {
-//         fsExtra.writeJsonSync('model-draco.gltf', results.gltf);
-//     });
-
-
-app.use(express.static(__dirname + '/public'));
-
-app.set("view engine", "ejs");
-
-app.get("/", function(req, res){
-	res.render("3DModel");
+app.get("/", function(req, res) {
+	res.render("scene.ejs");
 });
 
 app.listen(3000, function(){
